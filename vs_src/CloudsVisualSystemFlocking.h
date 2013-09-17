@@ -13,14 +13,14 @@
 #include "CloudsVisualSystem.h"
 
 //TODO: rename this to your own visual system
-class CloudsVisualSystemEmpty : public CloudsVisualSystem {
+class CloudsVisualSystemFlocking : public CloudsVisualSystem {
   public:
     
 	//TODO: Change this to the name of your visual system
 	//This determines your data path so name it at first!
 	//ie getVisualSystemDataPath() uses this
     string getSystemName(){
-		return "EmptySystem";
+		return "Flocking";
 	}
 
 	//These methods let us add custom GUI parameters and respond to their events
@@ -92,25 +92,43 @@ class CloudsVisualSystemEmpty : public CloudsVisualSystem {
 //	}
 
 	//
-	ofCamera& getCameraRef(){
-		if(videoLoaded){
-			return cloudsCamera;
-		}
+	ofCamera& getCameraRef(){		
 		return CloudsVisualSystem::getCameraRef();
 	}
-
+    
+    
+    void loadShaders();
+    void setupFbos();
+    int ID(int x, int y);
+    void setupVbo();
+    void updateAcceleration();
+    void updateVelocity();
+    void updatePosition();
+    void randomize(); 
+    void setupFboViewerGui(string name, ofFbo *fbo); 
+    void addGui(ofxUICanvas *g);
+    
 protected:
     
-    //  Your Stuff
-    //
-	
-	ofxUISuperCanvas* customGui;
-	bool customToggle;
-	float customFloat1;
-	float customFloat2;
-	
-	bool videoLoaded;
-	ofImage someImage;
-	ofShader pointcloudShader;
-	ofVboMesh simplePointcloud;
+    ofxBoidSystem *ps;
+    float *pos;
+    float *vel;
+    float pointSize;
+    float resolution;
+    int rows, cols, size, numfloat;
+    ofShader posShader;
+    ofShader velShader;
+    ofShader accShader;
+    ofShader rdrShader;
+    
+    ofFbo posFboDst;
+    ofFbo posFboSrc;
+    
+    ofFbo velFboDst;
+    ofFbo velFboSrc;
+    
+    ofFbo accFboDst;
+    ofFbo accFboSrc;
+    
+    ofVbo vbo;
 };
