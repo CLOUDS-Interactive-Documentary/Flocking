@@ -129,8 +129,8 @@ void main()
     }
     else if(m < velLimitLow)
     {
-		vel = normalize(vel)*velLimitLow; 
+		  vel = normalize(vel)*velLimitLow; 
     }
-    
+
    	gl_FragColor = vec4(vel, 1.0);   	
 }

@@ -1,0 +1,109 @@
+<Canvas>
+    <Kind>42</Kind>
+    <Name>SystemSettings</Name>
+    <IsMinified>0</IsMinified>
+    <XPosition>487.000000000</XPosition>
+    <YPosition>8.000000000</YPosition>
+</Canvas>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DEBUG</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>UPDATE ACC</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>UPDATE VEL</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>UPDATE POS</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>THRESHOLDS</Name>
+    <HighValue>0.783251286</HighValue>
+    <LowValue>0.704433501</LowValue>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>BORDER</Name>
+    <Value>1024.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>ZONE RADIUS</Name>
+    <Value>232.039413452</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>VELOCITY MIN/MAX</Name>
+    <HighValue>23.029556274</HighValue>
+    <LowValue>11.083744049</LowValue>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>ACCELERATION MAXIMUM</Name>
+    <Value>4.802955627</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>DAMPING</Name>
+    <Value>0.842364550</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>CENTER CONSTANT</Name>
+    <Value>0.018719211</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>ATTRACT CONSTANT</Name>
+    <Value>0.026108375</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>ALIGN CONSTANT</Name>
+    <Value>0.020197045</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>REPEL CONSTANT</Name>
+    <Value>0.060591131</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>COHESION CONSTANT</Name>
+    <Value>0.019704433</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>PERLIN CONSTANT</Name>
+    <Value>0.067487687</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>NOISE SCALE</Name>
+    <Value>0.000985222</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW ZONES</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW VELOCITIES</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW ACCELERATIONS</Name>
+    <Value>0</Value>
+</Widget>

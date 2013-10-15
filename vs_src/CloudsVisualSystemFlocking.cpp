@@ -49,6 +49,10 @@ void CloudsVisualSystemFlocking::selfGuiEvent(ofxUIEventArgs &e){
 
 //Use system gui for global or logical settings, for exmpl
 void CloudsVisualSystemFlocking::selfSetupSystemGui(){
+
+    sysGui->addToggle("UPDATE ACC", &bUpdateAcc);
+    sysGui->addToggle("UPDATE VEL", &bUpdateVel);
+    sysGui->addToggle("UPDATE POS", &bUpdatePos);
     sysGui->addButton("RANDOMIZE", false);
     sysGui->addButton("ADD PARTICLE", false);
     sysGui->addSpacer();
@@ -139,6 +143,11 @@ void CloudsVisualSystemFlocking::selfSetup()
     ps = new ofxBoidSystem();
     pointSize = 5.0;
     
+    
+    bUpdateVel = true;
+    bUpdateAcc = true;
+    bUpdatePos = true;
+
     resolution = 72;
     rows = resolution;
     cols = resolution;
@@ -235,9 +244,9 @@ void CloudsVisualSystemFlocking::selfSceneTransformation(){
 
 //normal update call
 void CloudsVisualSystemFlocking::selfUpdate(){
-    updateAcceleration();
-    updateVelocity();
-    updatePosition();
+    if(bUpdateAcc) updateAcceleration();
+    if(bUpdateVel) updateVelocity();
+    if(bUpdatePos) updatePosition();
 }
 
 void CloudsVisualSystemFlocking::updateAcceleration()

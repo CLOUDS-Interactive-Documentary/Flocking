@@ -51,36 +51,37 @@ void main()
 
             vec3 direction = otherPos - pos; 
             float dist = length(direction);            
-            
-            if(dist < zoneRadius)
-            {                
-                float percent = dist/zoneRadius;
-                neighborCentroid +=otherPos; 
-                numNeighbors+=1.0; 
-
-                if(percent < threshLow)        
-                {
-                    float F = ( threshLow / percent - 1.0 ) * repelForceConstant;
-                    direction = normalize(direction); 
-                    direction*=F;
-                    acc -= direction;
+            if(dist > 0.00001)
+            {
+                if(dist < zoneRadius)
+                {                
+                    float percent = dist/zoneRadius;
+                    neighborCentroid +=otherPos;                     
+                    numNeighbors+=1.0; 
+                    if(percent < threshLow)        
+                    {
+                        float F = ( threshLow / percent - 1.0 ) * repelForceConstant;
+                        direction = normalize(direction); 
+                        direction*=F;
+                        acc -= direction;                        
+                    }
+                    else if(percent < threshHigh)
+                    {
+                        float threshDelta = threshHigh - threshLow; 
+                        float adjustedPercent = ( percent - threshLow ) / threshDelta;
+                        float F = ( 0.5 - cos( adjustedPercent * PI * 2.0 ) * 0.5 + 0.5 ) * alignForceConstant;
+                        acc += normalize(otherVel)*F;                    
+                    }
+                    else
+                    {                    
+                        float threshDelta = 1.0 - threshHigh; 
+                        float adjustedPercent = ( percent - threshHigh ) / threshDelta;
+                        float F = ( 1.0 - ( cos( adjustedPercent * TWO_PI ) * -0.5 + 0.5 ) ) * attractForceConstant; 
+                        direction = normalize(direction); 
+                        direction *= F;
+                        acc += direction;                    
+                    }                
                 }
-                else if(percent < threshHigh)
-                {
-                    float threshDelta = threshHigh - threshLow; 
-                    float adjustedPercent = ( percent - threshLow ) / threshDelta;
-                    float F = ( 0.5 - cos( adjustedPercent * PI * 2.0 ) * 0.5 + 0.5 ) * alignForceConstant;
-                    acc += normalize(otherVel)*F;                    
-                }
-                else
-                {                    
-                    float threshDelta = 1.0 - threshHigh; 
-                    float adjustedPercent = ( percent - threshHigh ) / threshDelta;
-                    float F = ( 1.0 - ( cos( adjustedPercent * TWO_PI ) * -0.5 + 0.5 ) ) * attractForceConstant; 
-                    direction = normalize(direction); 
-                    direction *= F;
-                    acc += direction;                    
-                }                
             }
             flockCentroid += otherPos;             
         }
@@ -102,5 +103,5 @@ void main()
         acc = normalize(acc)*accLimit; 
     }
 
-  	gl_FragColor = vec4(acc, numNeighbors/total); 
+  	gl_FragColor = vec4(acc, 3.0*numNeighbors/total); 
 }

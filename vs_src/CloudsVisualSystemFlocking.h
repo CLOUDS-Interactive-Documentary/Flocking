@@ -11,6 +11,7 @@
 #pragma once
 
 #include "CloudsVisualSystem.h"
+#include "ofxAutoReloadedShader.h"
 
 //TODO: rename this to your own visual system
 class CloudsVisualSystemFlocking : public CloudsVisualSystem {
@@ -116,10 +117,14 @@ protected:
     float pointSize;
     float resolution;
     int rows, cols, size, numfloat;
-    ofShader posShader;
-    ofShader velShader;
-    ofShader accShader;
-    ofShader rdrShader;
+    ofxAutoReloadedShader posShader;
+    ofxAutoReloadedShader velShader;
+    ofxAutoReloadedShader accShader;
+    ofxAutoReloadedShader rdrShader;
+    
+    bool bUpdateVel;
+    bool bUpdateAcc;
+    bool bUpdatePos;
     
     ofFbo posFboDst;
     ofFbo posFboSrc;
