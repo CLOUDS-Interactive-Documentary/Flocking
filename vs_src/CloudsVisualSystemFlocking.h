@@ -116,6 +116,9 @@ protected:
     float *vel;
     float pointSize;
     float resolution;
+    float redColor;
+    float greenColor;
+    float blueColor;
     int rows, cols, size, numfloat;
     ofxAutoReloadedShader posShader;
     ofxAutoReloadedShader velShader;
@@ -125,6 +128,9 @@ protected:
     bool bUpdateVel;
     bool bUpdateAcc;
     bool bUpdatePos;
+    
+    ofTexture glow;
+    float spriteSize;
     
     ofFbo posFboDst;
     ofFbo posFboSrc;

@@ -127,7 +127,10 @@ void CloudsVisualSystemFlocking::guiSystemEvent(ofxUIEventArgs &e){
 }
 //use render gui for display settings, like changing colors
 void CloudsVisualSystemFlocking::selfSetupRenderGui(){
-    rdrGui->addSlider("POINT SIZE", 0.0, 20.0, &pointSize);
+    rdrGui->addSlider("POINT SIZE", 0.0, 40.0, &pointSize);
+    rdrGui->addSlider("RED", 0.0, 1.0, &redColor);
+    rdrGui->addSlider("GREEN", 0.0, 1.0, &greenColor);
+    rdrGui->addSlider("BLUE", 0.0, 1.0, &blueColor);
 }
 
 void CloudsVisualSystemFlocking::guiRenderEvent(ofxUIEventArgs &e){
@@ -139,11 +142,13 @@ void CloudsVisualSystemFlocking::guiRenderEvent(ofxUIEventArgs &e){
 // geometry should be loaded here
 void CloudsVisualSystemFlocking::selfSetup()
 {    
-    debugGridSize = 1024;
+    debugGridSize = 4096;
     ps = new ofxBoidSystem();
     pointSize = 5.0;
     
-    
+    redColor = 1.0;
+    greenColor = 0.0;
+    blueColor = 0.0;
     bUpdateVel = true;
     bUpdateAcc = true;
     bUpdatePos = true;
@@ -151,6 +156,12 @@ void CloudsVisualSystemFlocking::selfSetup()
     resolution = 72;
     rows = resolution;
     cols = resolution;
+    
+    ofDisableArbTex();
+    ofLoadImage(glow, getVisualSystemDataPath()+"images/glow.png");
+    spriteSize = glow.getWidth();
+    cout << spriteSize << endl;
+    ofEnableArbTex();
     
     loadShaders();
     setupFbos();
@@ -349,18 +360,24 @@ void CloudsVisualSystemFlocking::updatePosition()
 // selfDraw draws in 3D using the default ofEasyCamera
 // you can change the camera by returning getCameraRef()
 void CloudsVisualSystemFlocking::selfDraw(){
+    glDepthMask(false);
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    mat->begin();
+    ofEnablePointSprites();
     ofSetColor(0,255);
     rdrShader.begin();
+    rdrShader.setUniform3f("u_color", redColor, greenColor, blueColor);
     rdrShader.setUniformTexture("posData", posFboSrc.getTextureReference(), posFboSrc.getTextureReference().getTextureData().textureID);
     rdrShader.setUniformTexture("accData", accFboSrc.getTextureReference(), accFboSrc.getTextureReference().getTextureData().textureID);
+
+    glow.bind();
     glPointSize(pointSize);
     vbo.draw(GL_POINTS, 0, size);
-    rdrShader.end();
+    glow.unbind();
     
-    mat->end();
-
+    rdrShader.end();
+    ofDisablePointSprites();
+    glDepthMask(true);
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 }
 
 // draw any debug stuff here

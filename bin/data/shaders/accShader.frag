@@ -103,5 +103,5 @@ void main()
         acc = normalize(acc)*accLimit; 
     }
 
-  	gl_FragColor = vec4(acc, 3.0*numNeighbors/total); 
+  	gl_FragColor = vec4(acc, 10.0*numNeighbors/total); 
 }
